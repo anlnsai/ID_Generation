@@ -16,13 +16,12 @@ def getID(num, d=6):
     
     if(string != ""):
         number = re.findall(r'\d+',str_num)
-        number = number[0] if (len(number)>0) else ""
-        number = getID(number, d)   
-        number = number[len(string):]
-        if(int(number) == 0):
-            if(string.count('Z') == (d-1)):
-                return string + "Z"                
-            elif(string[-1] != 'Z'):
+        number = number[0] if (len(number)>0) else ''
+        if(number != ''):
+            number = getID(number, d)   
+            number = number[len(string):]
+        if(number == '' or int(number) == 0):
+            if(string[-1] != 'Z'):
                 return string[:-1] + chr(ord(string[-1]) + 1) + number
             else:
                 return  string + 'A' + number[:-1]                
@@ -48,12 +47,14 @@ def getID(num, d=6):
 #i = 'ZZZZA9'
 #i = 'ZZZZZ9'
 #i = 'A00000000'
-#alphanum = getID(i, 9)
+#i = 'ZZZZZ9'
+#i = 'ZZZZZA'
+#i = 'ZZZZZC'
+#alphanum = getID(i, 6)
 #print(alphanum)
 
 
-
-i = 'A99999'
+i = '0'
 
 while(i != ""):
     alphanum = getID(i, 6)
